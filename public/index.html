@@ -2,16 +2,25 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>To DO LIST</title>
+    <title>To do list</title>
     <link rel="stylesheet" href="./css/styles.css">
     <script src="./js/bundle.js"></script>
   </head>
   <body>
-    <p>To do:</p>
+    <h2>To do:</h2>
 
     <div id="app">
       <ul>
-          <li v-for="task in todos">{{ task }}</li>
+          <li v-for="task in todos" v-bind:class="task.highPriority ? 'high' : 'low'">
+            <span>{{ task.name }}</span>
+
+            <input  type="radio" id="true" v-bind:value= "true" v-model="task.highPriority">
+            <label for="true">Urgent</label>
+
+            <input type="radio" id="false" v-bind:value= "false" v-model="task.highPriority">
+            <label for="false">Low priority</label>
+
+          </li>
       </ul>
       <form v-on:submit.prevent="saveNewTask">
         <label for="new-task">Add next task:</label>
